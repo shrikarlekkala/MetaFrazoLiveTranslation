@@ -1,4 +1,5 @@
-# Import the required module for text 
+# NOTE : ALTER TO MEET NEW STANDARDS, this is very simple
+#Import the required module for text 
 
 from gtts import gTTS
   
