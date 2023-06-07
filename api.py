@@ -1,64 +1,39 @@
-import io
-import requests
 import speech_recognition as sr
-from pydub import AudioSegment
-from pydub.playback import play
-import openai
+import pyttsx3
+from langdetect import detect
+from googletrans import Translator
 
-openai.api_key = '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' 
+# Create instances of classes you will be using
+r = sr.Recognizer()
+translator = Translator(service_urls=['translate.google.com'])
+tts = pyttsx3.init()
 
-def transcribe_audio(audio_data):
-    response = openai.Audio.transcribe(audio=audio_data, model="whisper") #PROBLEM MAY BE HERE
-    return response['text']
+supported_languages = ["en", "es"]
 
-def translate_text(text, source_lang, target_lang):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=f"Translate the following {source_lang} text to {target_lang}: {text}\nTarget language:",
-        temperature=0,
-        max_tokens=100,
-        top_p=1.0,
-        frequency_penalty=0,
-        presence_penalty=0,
-        n=1,
-        stop=None,
-        log_level="info",
-    )
-    translated_text = response.choices[0].text.strip()
-    
-    eleven_labs_url = "https://api.elevenlabs.ai/speak"
-    eleven_labs_params = {
-        "text": translated_text,
-        "target_lang": target_lang
-    }
-    eleven_labs_headers = {
-        "Authorization": "Bearer 3da83448f156808f581fc3e68546b0a2"
-    }
-    eleven_labs_response = requests.get(eleven_labs_url, params=eleven_labs_params, headers=eleven_labs_headers)
-
-    return eleven_labs_response.content
-
-
-source_lang = "en"
-target_lang = "fr"
-
-# Record audio from microphone and convert speech to text using OpenAI Whisper
-recognizer = sr.Recognizer()
-with sr.Microphone() as source:
-    print("Speak now...")
-    audio = recognizer.listen(source)
-
-audio_data = audio.get_raw_data(convert_rate=16000, convert_width=2)
-source_text = transcribe_audio(audio_data)
-
-# Translate the text using OpenAI
-translated_text = translate_text(source_text, source_lang, target_lang)
-
-# Save the translated speech
-output_file = "translated_speech.mp3"
-with open(output_file, "wb") as f:
-    f.write(translated_text)
-
-# Play 
-translated_audio = AudioSegment.from_file(output_file)
-play(translated_audio)
+try:
+    while True:
+        # Use default microphone
+        with sr.Microphone() as source:
+            print("Speak something...")
+            r.adjust_for_ambient_noise(source)
+            audio = r.listen(source)
+        
+        try:
+            text = r.recognize_google(audio)
+            input_language = detect(text)
+            # Check if the detected language is in the list of supported languages
+            if input_language in supported_languages:
+                target_lang = "es" if input_language == "en" else "en"
+                translation = translator.translate(text, dest=target_lang)
+                print(f"Translated to {target_lang}: {translation.text}")
+                # Speak translated text
+                tts.say(translation.text)
+                tts.runAndWait()
+            else:
+                print("Unsupported language")
+        except sr.UnknownValueError:
+            print("Google Speech Recognition could not understand audio.")
+        except sr.RequestError as e:
+            print(f"Could not request results from Google Speech Recognition service: {e}")
+except KeyboardInterrupt:
+    pass
