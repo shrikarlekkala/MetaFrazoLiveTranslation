@@ -20,4 +20,21 @@ The duration of the recording is a hyperparameter that must be set based on requ
 Multiple models are available, ranging from lightweight to heavy. Choosing the most suitable model depends on factors such as computational resources, acceptable time delay, and performance requirements.
 
 
+Listen to any audio stream on your machine and print out the transcribed or translated audio.
+
+SOURCE: https://github.com/Awexander/audioWhisper.git
+
+Advantage:
+
+	It Translates the Audio from any device to Text Accuracy is up to 92%.
+	python audioWhisper.py Translate It give the Text Translate from Original Audio to English Language
+	If we give Transcribe, then it will give the Text of Original Language.
+
+Disadvantage:
+
+	The translated Text is not perfect, but it can still translate the point of the talk from audio.
+	It has more Time Delay.
+	Sometimes it won’t give Accurate Text.
+	It provides the Text as Subtitle, but the requirement is to get the text at a time.
+
 
