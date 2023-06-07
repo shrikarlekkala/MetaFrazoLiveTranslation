@@ -1,3 +1,23 @@
 https://www.javatpoint.com/how-to-convert-text-to-speech-in-python ---- text to speech
 
 
+Video to text transcription using OpenAI-Whisper package.
+
+Current procedure:
+
+Manually upload the video and adjust the file name in the code.
+Execute the code.
+Advantages:
+
+Offers higher accuracy compared to other APIs, approximately 92% accuracy (may vary depending on the specific model used). Reference: https://github.com/openai/whisper
+Implementation is straightforward, simplifying the process.
+Supports multiple languages.
+Capable of handling diverse accents, background noise, and technical language.
+Disadvantages:
+
+Cannot be utilized for real-time translation; the package only accepts pre-recorded audio files for transcription.
+The duration of the recording is a hyperparameter that must be set based on requirements, API processing time, and specific use case.
+Multiple models are available, ranging from lightweight to heavy. Choosing the most suitable model depends on factors such as computational resources, acceptable time delay, and performance requirements.
+
+
+
