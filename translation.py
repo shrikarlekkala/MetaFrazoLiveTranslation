@@ -15,16 +15,6 @@ def load_and_translate():
     # Send request to Deepgram API
     filename = request.json['text_input']
     url = "https://api.deepgram.com/v1/listen?punctuate=true"
-    #payload = {"url": filename}  # Replace "string" with the URL of your MP3 file
-    #headers = {"Authorization": "Token f6254826eee78cf8e91905df1ffc51c11fda157c", "Content-Type": "application/json"}
-
-    #response = requests.post(url, headers=headers, json=payload)
-
-    # Get transcript from Deepgram API response
-    #transcript = response.json()
-
-    #Raw text
-    #raw_text = transcript['results']['channels'][0]['alternatives'][0]['transcript']
 
     # Set up DeepL API request
     url = 'https://api-free.deepl.com/v2/translate'
