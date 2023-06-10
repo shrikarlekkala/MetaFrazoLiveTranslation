@@ -20,6 +20,9 @@ function translate(user_input){
     xhr.onload = function(){
         $('#translatedtext').text(this.responseText);
         console.log(this.responseText);
+        //This will play the text as speech, the microphone can't pick up the sound or it will repeat.  This should not be an issue because the audio is being played though headsets
+        var utterance = new SpeechSynthesisUtterance(this.responseText);
+        speechSynthesis.speak(utterance);
     };
     xhr.send(JSON.stringify(params));
     
