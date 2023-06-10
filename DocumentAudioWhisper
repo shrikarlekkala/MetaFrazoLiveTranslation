@@ -1,0 +1,11 @@
+Prerequisites:
+Turn on stereo mix settings on windows first before running the script
+Install and add ffmpeg to your PATH
+Install CUDA to your system
+Setup:
+choose envs of your choices.
+clone this repo into your local storage.
+run pip install -r requirements.txt
+run python audioWhisper.py --devices true to get device_index and channel
+run python audioWhisper.py . Default will be Transcribe 
+run python audioWhisper.py -- task translate
