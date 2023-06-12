@@ -33,10 +33,10 @@ offer a robust and intuitive administrative console for managing user accounts, 
 settings, and other configurations.
 8. Cloud-Based Deployment: To ensure scalability and ease of access, the software will be
 deployed on a secure cloud platform, allowing churches to use the service on a subscription
-basis. This eliminates the need for substanƟal hardware investments, making the solution more
+basis. This eliminates the need for substantial hardware investments, making the solution more
 accessible for churches of all sizes.
 
-By implemenƟng this real-time audio translation and distribution software, we can greatly improve
+By implementing this real-time audio translation and distribution software, we can greatly improve
 language accessibility during church services, ensuring inclusivity for all attendees regardless of their
 language proficiency. The software is designed with growth in mind, ready to accommodate an
 increasing number of users or additional languages in the future.
