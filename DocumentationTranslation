@@ -11,8 +11,9 @@ This is documentation for the translation.js and translation.py approach
       
 
 
-Set up for Chrome browsers.  Both SpeechSynthesisUtterance and webkitSpeechRecognition are maintained by each browser respectively, in this case Google.  
-You must have your computer audio configured correctly, specify the device output from chrome to a headset.  
+Set up for Chrome browsers only.  Please perform a "hard reload" to ensure your browser downloads the lastest javascript update.  
+Both SpeechSynthesisUtterance and webkitSpeechRecognition are maintained by each browser respectively, in this case Google.  
+You must have your computer audio configured correctly.  You may have to take the chrome output off of "default" audio output and specify the device via the "app volume and device preferences" in windows.  
 If audio is loud enough it will get feedback and repeat, this is expected for this use case and is not an issue.
 
 Live demo site:  https://mymlportfolio.com/livetranslationdemo.html
