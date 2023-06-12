@@ -1,0 +1,18 @@
+This is documentation for the translation.js and translation.py approach
+
+
+
+	Advantages:  Build out of basic fuctionality is complete
+
+	Disadvantages:  Partially done in Javascript, some of the team may not be familiar.  
+	
+  Known bugs:   There is a session timeout issue and audio input pauses that are documented in the code, 
+			but I am confident these issues can be overcome. 
+      
+
+
+Set up for Chrome browsers.  Both SpeechSynthesisUtterance and webkitSpeechRecognition are maintained by each browser respectively, in this case Google.  
+You must have your computer audio configured correctly, specify the device output from chrome to a headset.  
+If audio is loud enough it will get feedback and repeat, this is expected for this use case and is not an issue.
+
+Live demo site:  https://mymlportfolio.com/livetranslationdemo.html
