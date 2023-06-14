@@ -6,28 +6,58 @@
 
 $(document).ready(function(){
 
-function translate(user_input){
-    
-    run_speech();//Call to start transcription immediately after the last text is sent to be translated.  I could also place this in the "Handle speech recognition results" to make it recursive.  This could also be the cause of the gap metioned above.
-    var xhr = new XMLHttpRequest();
-    
-    //user_input is the transcription
-    var params = {'text_input':user_input};
 
-    xhr.open('POST', 'https://mknapp62.pythonanywhere.com/translator', true);
-    xhr.setRequestHeader('Content-type', 'application/json');
+//INPUT LANGUAGE SELECTION from front end dropdown buttons
+var inputLang;
+      $('.dropdown-menu a[data-langin]').click(function() {
+        inputLang= $(this).data('langin');
+        $('#inputLanguageDropdown').text($(this).text());
+        console.log('Selected Input Language:', inputLang);
 
-    xhr.onload = function(){
-        $('#translatedtext').text(this.responseText);
-        console.log(this.responseText);
-        //This will play the text as speech, the microphone can't pick up the sound or it will repeat.  This should not be an issue because the audio is being played though headsets
-        var utterance = new SpeechSynthesisUtterance(this.responseText);
-        utterance.lang = "es-ES";
+      });
+      
+//OUTPUT LANGUAGE SELECTION from front end dropdown buttons
+var outputLang;
+      $('.dropdown-menu a[data-langout]').click(function() {
+        outputLang = $(this).data('langout');
+        $('#outputLanguageDropdown').text($(this).text());
+        console.log('Selected Output Language:', outputLang);
+
+      });
+
+
+
+function javascript_translation_deepl(textToTranslate, lang_index){
+    //Call to immediately listen for the next spoken words
+    //run_speech();
+    
+    // Fetch API request
+    var lang = ["RO", "ZH", "EN-US", "EN"];
+    fetch("https://api-free.deepl.com/v2/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `auth_key=954afa95-a70d-41f0-c9c2-9d29d644acf6:fx&text=${encodeURIComponent(textToTranslate)}&target_lang=${lang[lang_index]}`,
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the API response
+        const translatedText = data.translations[0].text;
+        console.log("Translated text:", translatedText);
+        $('#translatedtext').text(translatedText);
+        
+        //Text to speech
+        var utterance = new SpeechSynthesisUtterance(translatedText);
+        utterance.lang = outputLang;
         speechSynthesis.speak(utterance);
-    };
-    xhr.send(JSON.stringify(params));
-    
-    }
+        console.log('played sound.  If no sound was played please ensure your headphones are properly configured');
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error("Translation error:", error);
+      });
+}
     
 //Declared outside of function so stop-btn can use "recognition"    
 var recognition;
@@ -40,7 +70,7 @@ function run_speech(){
     if (SpeechRecognition) {
         
       
-      recognition.lang = 'en-US'; // Set the desired language
+      recognition.lang = inputLang; // Set the desired language
       
       recognition.continuous = true;
     
@@ -68,24 +98,39 @@ function run_speech(){
         $('#transcript').text(transcript);
     
         // Send the transcript to Deepgram for further processing
-        translate(transcript);
+        //All api's have different codes for the same language the switch statement is translating it for the next api call
+        let target_lang;
+        switch(outputLang){
+
+            case "ro-RO":
+                target_lang = 0;
+                break;
+            case "zh-cn":
+                target_lang = 1;
+                break;
+            case "en-US":
+                target_lang = 2;
+                break;
+        }
+        run_speech();
+        javascript_translation_deepl(transcript, target_lang);
       };
       
     
       // Handle speech recognition results
       recognition.addEventListener('result', function(event) {
-        handleRecognitionResult(event);
-        // Recursive call was also working here
+      handleRecognitionResult(event);
+      // run_speech() Recursive call was also working here as well
     
       });
     
-        console.log(isRecording, SpeechRecognition);
+      console.log(isRecording, SpeechRecognition);
         
       // Handle errors
       recognition.addEventListener('error', function(event) {
-        console.error('Speech recognition error:', event.error);
-         run_speech();//Recursive call to start again if there is an error 
-        
+      console.error('Speech recognition error:', event.error);
+      run_speech();//Recursive call to start again if there is an error 
+      
       });
     
     }
