@@ -150,7 +150,7 @@ $('#stop-btn').on('click', function() {
    SpeechRecognition = null;
 });
       
-/Appears to solve the random program termination issue   
+//Appears to solve the random program termination issue   
 setInterval(check_speech, 1000);
 async function check_speech(){
     console.log(isRecording);
