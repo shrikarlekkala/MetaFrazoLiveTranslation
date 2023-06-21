@@ -178,8 +178,9 @@ async function run_speech(){
       recognition.addEventListener('result', function(event) {
       handleRecognitionResult(event);
 
-      run_speech(); //Recursive call was also working here as well
-    
+       if(start_listening){
+            run_speech();//Recursive call to start again 
+        }
       });
 
         i++;
@@ -189,8 +190,9 @@ async function run_speech(){
       recognition.addEventListener('error', function(event) {
       console.error('Speech recognition error:', event.error);
 
-      run_speech();//Recursive call to start again if there is an error 
-     
+       if(start_listening){
+            run_speech();//Recursive call to start again 
+        }
       
       });
       
