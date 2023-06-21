@@ -90,7 +90,7 @@ function javascript_translation_deepl(textToTranslate, lang_index){
         //Text to speech
         var utterance = new SpeechSynthesisUtterance(translatedText);
  
-        utterance.lang = 'en-US';  //outputLang
+        utterance.lang = outputLang;  //outputLang
         utterance.voice = voices[target_voice];
         speechSynthesis.speak(utterance);
         console.log('played sound.  If no sound was played please ensure your headphones are properly configured');
