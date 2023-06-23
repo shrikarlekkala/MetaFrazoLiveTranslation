@@ -38,10 +38,11 @@ document.addEventListener('keydown', function(e) {
       return false;
     } else if (event.ctrlKey && event.keyCode == 85) {
         e.preventDefault();
-      alert("Not Allowed");
+      alert("You Can not Do This!");
       return false;
     }
   }, false);
+
 
 
 //INPUT LANGUAGE SELECTION from front end dropdown buttons
@@ -67,41 +68,31 @@ window.speechSynthesis.onvoiceschanged = function() {
   console.log(voices);
 };  
 
-function javascript_translation_deepl(textToTranslate, lang_index){
-    //Call to immediately listen for the next spoken words
-    //run_speech();
+function translate(user_input, language){
     
-    // Fetch API request
-    var lang = ["RO", "ZH", "EN-US", "EN"];
-    fetch("https://api-free.deepl.com/v2/translate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `auth_key=954afa95-a70d-41f0-c9c2-9d29d644acf6:fx&text=${encodeURIComponent(textToTranslate)}&target_lang=${lang[lang_index]}`,
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Handle the API response
-        const translatedText = data.translations[0].text;
-        console.log("Translated text:", translatedText);
-        $('#translatedtext').text(translatedText);
-        
-        //Text to speech
-        var utterance = new SpeechSynthesisUtterance(translatedText);
- 
-        utterance.lang = outputLang;  //outputLang
+    //run_speech();//Call to start transcription immediately after the last text is sent to be translated.  I could also place this in the "Handle speech recognition results" to make it recursive.  This could also be the cause of the gap metioned above.
+
+    var xhr = new XMLHttpRequest();
+    
+    //user_input is the transcription
+    var params = {'text_input':[user_input, language]};
+
+    xhr.open('POST', 'http://flaskapi-env.eba-zbecxnrw.us-east-2.elasticbeanstalk.com/', true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+
+    xhr.onload = function(){
+        $('#translatedtext').text(this.responseText);
+        console.log(this.responseText);
+        var utterance = new SpeechSynthesisUtterance(this.responseText);
+        utterance.lang = outputLang;
         utterance.voice = voices[target_voice];
         speechSynthesis.speak(utterance);
         console.log('played sound.  If no sound was played please ensure your headphones are properly configured');
-        return;
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error("Translation error:", error);
-        return;
-      });
-}
+    };
+  
+    xhr.send(JSON.stringify(params));
+    
+    }
  
 
 
@@ -152,7 +143,7 @@ async function run_speech(){
         }
 
         //run_speech();
-        return javascript_translation_deepl(transcript, target_lang);
+        return translate(transcript, target_lang);//target_lang
       };
 
   
@@ -177,8 +168,7 @@ async function run_speech(){
       // Handle speech recognition results
       recognition.addEventListener('result', function(event) {
       handleRecognitionResult(event);
-
-       if(start_listening){
+        if(start_listening){
             run_speech();//Recursive call to start again 
         }
       });
@@ -189,10 +179,9 @@ async function run_speech(){
       // Handle errors
       recognition.addEventListener('error', function(event) {
       console.error('Speech recognition error:', event.error);
-
-       if(start_listening){
-            run_speech();//Recursive call to start again 
-        }
+      if(start_listening){
+      run_speech();//Recursive call to start again if there is an error 
+      }
       
       });
       
