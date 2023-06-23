@@ -1,7 +1,7 @@
 //TRANSCRIPTION AND TRANSLATION API DEMO
 //THIS IS USING JQUERY BUT I CAN EASILY CONVERT IT TO PLAIN JAVASCRIPT
 //There are two issues that I can see with this approach:
-//  1. It appears if there is any interruption in connection the transcription stops and needs to be reset, this could also be a browser session issue.  We could have it auto-reset, but I haven't been able to do it reliably.
+//  1. SOLVED-It appears if there is any interruption in connection the transcription stops and needs to be reset, this could also be a browser session issue.  We could have it auto-reset, but I haven't been able to do it reliably.
 //  2. There is a gap when the transcription ends and before the new one begins. It may not be a big deal depending on the speakers' cadence.
 
 $(document).ready(function(){
