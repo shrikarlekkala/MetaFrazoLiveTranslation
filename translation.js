@@ -77,7 +77,7 @@ function translate(user_input, language){
     //user_input is the transcription
     var params = {'text_input':[user_input, language]};
 
-    xhr.open('POST', 'http://flaskapi-env.eba-zbecxnrw.us-east-2.elasticbeanstalk.com/', true);
+    xhr.open('POST', 'https://flaskapi-env.eba-zbecxnrw.us-east-2.elasticbeanstalk.com/', true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function(){
