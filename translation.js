@@ -5,6 +5,12 @@
 //  2. There is a gap when the transcription ends and before the new one begins. It may not be a big deal depending on the speakers' cadence.
 
 $(document).ready(function(){
+// Check if the user is authenticated
+if (!localStorage.getItem('accessToken')) {
+    // Redirect to Cognito login page
+    window.location.href = 'https://metafrazocc.com';
+}
+  
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
 });
@@ -77,7 +83,7 @@ function translate(user_input, language){
     //user_input is the transcription
     var params = {'text_input':[user_input, language]};
 
-    xhr.open('POST', 'https://flaskapi-env.eba-zbecxnrw.us-east-2.elasticbeanstalk.com/', true);
+    xhr.open('POST', 'https://api.metafrazocc.com/', true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function(){
