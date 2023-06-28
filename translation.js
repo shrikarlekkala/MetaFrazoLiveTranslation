@@ -5,10 +5,25 @@
 //  2. There is a gap when the transcription ends and before the new one begins. It may not be a big deal depending on the speakers' cadence.
 
 $(document).ready(function(){
+
+    // Define the user pool
+var poolData = {
+  UserPoolId: 'us-east-1_gApXxMNeb',
+  ClientId: 'tni68hrhonj30mijv03jpq2os'
+};
+
+var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
 // Check if the user is authenticated
-if (!localStorage.getItem('accessToken')) {
-    // Redirect to Cognito login page
-    window.location.href = 'https://metafrazocc.com';
+var cognitoUser = userPool.getCurrentUser();
+console.log(cognitoUser);
+if (cognitoUser !== null && cognitoUser.isAuthenticated()) {
+  // User is authenticated
+  console.log('verified');
+} else {
+  // User is not authenticated, redirect to the login page
+  //window.location.href = "https://metafrazocc.com";
+  console.log('not verified');
 }
   
 document.addEventListener('contextmenu', function(e) {
