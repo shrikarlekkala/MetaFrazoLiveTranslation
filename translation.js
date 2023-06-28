@@ -16,6 +16,7 @@ var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 // Check if the user is authenticated
 var cognitoUser = userPool.getCurrentUser();
+console.log(userPool);
 console.log(cognitoUser);
 if (cognitoUser !== null && cognitoUser.isAuthenticated()) {
   // User is authenticated
