@@ -82,7 +82,7 @@ var outputLang;
         outputLang = $(this).data('langout');
         $('#outputLanguageDropdown').text($(this).text());
         console.log('Selected Output Language:', outputLang);
-
+        toggleStartButton();
       });
 var voices;
 window.speechSynthesis.onvoiceschanged = function() {
@@ -92,7 +92,7 @@ window.speechSynthesis.onvoiceschanged = function() {
     //DISABLE start button until input language is selected
 $('#start-btn').prop('disabled', true);
   function toggleStartButton() {
-    if (inputLang) {
+    if (inputLang && outputLang) {
       $('#start-btn').prop('disabled', false);
     } else {
       $('#start-btn').prop('disabled', true);
