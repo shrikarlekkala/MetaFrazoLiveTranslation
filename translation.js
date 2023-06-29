@@ -73,7 +73,7 @@ var inputLang;
         inputLang= $(this).data('langin');
         $('#inputLanguageDropdown').text($(this).text());
         console.log('Selected Input Language:', inputLang);
-
+        toggleStartButton();
       });
       
 //OUTPUT LANGUAGE SELECTION from front end dropdown buttons
@@ -89,7 +89,16 @@ window.speechSynthesis.onvoiceschanged = function() {
   voices = window.speechSynthesis.getVoices();
   console.log(voices);
 };  
-
+    //DISABLE start button until input language is selected
+$('#start-btn').prop('disabled', true);
+  function toggleStartButton() {
+    if (inputLang) {
+      $('#start-btn').prop('disabled', false);
+    } else {
+      $('#start-btn').prop('disabled', true);
+    }
+  }
+    
 function translate(user_input, language){
     
     //run_speech();//Call to start transcription immediately after the last text is sent to be translated.  I could also place this in the "Handle speech recognition results" to make it recursive.  This could also be the cause of the gap metioned above.
