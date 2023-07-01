@@ -1,9 +1,127 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Meta Frazo Login</title>
-    <body>
-        <h2>Welcome to Meta Frazo's Speech Text Translation</h2>
-        <a href="https://metafrazocc.com/testinglivetranslation.html">Sign in</a>
-    </body>
-    </head>
+
+<head>
+    <title>Meta Frazo Login</title>
+    <style>
+        body {
+            background: linear-gradient(#05051f, #05051f, #835AFD, #05051f, #05051f, #05051f, #835AFD, #835AFD, #05051f, #05051f, #69c1ff, #cb304f, #05051f, #05051f, #05051f, #05051f, #4a5b8f, #419f91, #05051f, #05051f, #3a4aa1, #db3b69, #05051f);
+            background-size: 1800% 1800%;
+            -webkit-animation: Aurora 180s ease;
+            -moz-animation: Aurora 180s ease;
+            animation: Aurora 180s ease;
+            animation-iteration-count: 1;
+            margin: 0;
+            padding: 0;
+        }
+
+        @-webkit-keyframes Aurora {
+            0% {
+                background-position: 18% 0%;
+            }
+
+            50% {
+                background-position: 83% 100%;
+            }
+
+            100% {
+                background-position: 18% 0%;
+            }
+        }
+
+        @-moz-keyframes Aurora {
+            0% {
+                background-position: 18% 0%;
+            }
+
+            50% {
+                background-position: 83% 100%;
+            }
+
+            100% {
+                background-position: 18% 0%;
+            }
+        }
+
+        @keyframes Aurora {
+            0% {
+                background-position: 18% 0%;
+            }
+
+            50% {
+                background-position: 83% 100%;
+            }
+
+            100% {
+                background-position: 18% 0%;
+            }
+        }
+
+        .gif-container{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /*padding-top: 20px;*/
+        }
+        .center-top-gif {
+            margin-top: 0; /* Remove default margin */
+        }
+
+
+        .btn-container {
+            text-align: center;
+            padding-top: 40vh;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #835AFD;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: filter 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            filter: none;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        body:hover {
+            filter: brightness(110%);
+        }
+
+        @keyframes colorMovement {
+            0%,
+            100% {
+                filter: brightness(100%);
+            }
+
+            50% {
+                filter: brightness(110%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gif-container">
+        <img src="MetaFrazoPFP-removebg-preview.png" alt="Meta Frazo" class="center-top-gif">
+    </div>
+    <div class="btn-container">
+        <h2>Welcome to Meta Frazo's Live Translation Service</h2>
+        <a class="btn"
+            href="https://metafrazocc.com/testinglivetranslation.html">Sign in</a>
+    </div>
+</body>
+
 </html>
