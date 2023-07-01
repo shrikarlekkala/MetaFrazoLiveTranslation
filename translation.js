@@ -6,26 +6,48 @@
 
 $(document).ready(function(){
 
-    // Define the user pool
-var poolData = {
-  UserPoolId: 'us-east-1_gApXxMNeb',
-  ClientId: 'tni68hrhonj30mijv03jpq2os'
-};
+  $('#loginModal').modal({backdrop: 'static', keyboard: false});
+            $('#loginModal').modal('show');
+            
+  $('#login').submit(function(event) {
+        event.preventDefault();
+            var email = $('#email').val();
+            var pass = $('#password').val();
+                console.log(email, pass);
+                
+                
+         var idToken;
+        AWS.config.update({
+            region: 'us-east-1'
+          });
+        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
 
-var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        var params2 = {
+          ClientId: 'tni68hrhonj30mijv03jpq2os',
+          AuthFlow: 'USER_PASSWORD_AUTH',
+          AuthParameters: {
+            //'code': 'a4cf7255-fe82-4695-b626-747e42bb5c5d',
+            'redirect_uri': 'YOUR_REDIRECT_URI',
+            'USERNAME':email,
+            'PASSWORD': pass
+          }
+        };
 
-// Check if the user is authenticated
-var cognitoUser = userPool.getCurrentUser();
-console.log(userPool);
-console.log(cognitoUser);
-if (cognitoUser !== null && cognitoUser.isAuthenticated()) {
-  // User is authenticated
-  console.log('verified');
-} else {
-  // User is not authenticated, redirect to the login page
-  //window.location.href = "https://metafrazocc.com";
-  console.log('not verified');
-}
+        cognitoIdentityServiceProvider.initiateAuth(params2, (err, data) => {
+              if (err) {
+                console.error('Error exchanging authorization code:', err);
+                idToken = '';
+                console.log(idToken);
+                $('#loginModal').modal('show');
+              } else {
+                idToken = data.AuthenticationResult.IdToken;
+                console.log('ID Token:', idToken);
+                $('#loginModal').modal('hide');
+             }
+            });      
+
+      
+  });  
   
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault();
