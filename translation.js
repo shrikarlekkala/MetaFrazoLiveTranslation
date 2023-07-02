@@ -193,6 +193,13 @@ async function run_speech(){
                 target_lang = 2;
                 target_voice = 4;
                 break;
+            case "it-IT":
+                target_lang = 4;
+                target_voice = 12;
+                break;
+            default:
+                target_lang = 1;
+                target_voice = 19;
         }
 
         //run_speech();
