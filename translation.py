@@ -11,7 +11,7 @@ def load_and_translate():
     text_input = data[0]
     lang_num = int(data[1])
 
-    lang = ["RO", "ZH", "EN-US", "EN"]
+    lang = ["RO", "ZH", "EN-US", "EN", "IT"]
 
     # Set up DeepL API request
     url = 'https://api-free.deepl.com/v2/translate'
