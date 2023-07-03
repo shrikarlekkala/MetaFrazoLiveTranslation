@@ -120,7 +120,7 @@ $('#start-btn').prop('disabled', true);
       $('#start-btn').prop('disabled', true);
     }
   }
-    
+var allTranslation="";
 function translate(user_input, language){
     
     //run_speech();//Call to start transcription immediately after the last text is sent to be translated.  I could also place this in the "Handle speech recognition results" to make it recursive.  This could also be the cause of the gap metioned above.
@@ -134,7 +134,8 @@ function translate(user_input, language){
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function(){
-        $('#translatedtext').text(this.responseText);
+        allTranslation=allTranslation.concat(this.responseText)
+        $('#translated-text').val(allTranslation);
         console.log(this.responseText);
         var utterance = new SpeechSynthesisUtterance(this.responseText);
         utterance.lang = outputLang;
@@ -158,6 +159,7 @@ var i = 0;
 var start_listening = false;
 var target_lang;
 var target_voice;
+var allSpoken="";
 
 async function run_speech(){
       // Function to start recording
@@ -174,7 +176,8 @@ async function run_speech(){
           .join('');
     
         // Update the transcript element with the recognized speech
-        $('#transcript').text(transcript);
+        allSpoken=allSpoken.concat(transcript)
+        $('#spoken-text').val(allSpoken);s
     
         // Send the transcript to Deepgram for further processing
         //All api's have different codes for the same language the switch statement is translating it for the next api call
