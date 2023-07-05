@@ -134,7 +134,8 @@ function translate(user_input, language){
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function(){
-        allTranslation=allTranslation.concat(this.responseText)
+        allTranslation = allTranslation.concat(this.responseText + ' ');
+
         $('#translated-text').val(allTranslation);
         console.log(this.responseText);
         var utterance = new SpeechSynthesisUtterance(this.responseText);
@@ -176,7 +177,7 @@ async function run_speech(){
           .join('');
     
         // Update the transcript element with the recognized speech
-        allSpoken=allSpoken.concat(transcript)
+        allSpoken=allSpoken.concat(transcript + ' ');
         $('#spoken-text').val(allSpoken);
     
         // Send the transcript to Deepgram for further processing
