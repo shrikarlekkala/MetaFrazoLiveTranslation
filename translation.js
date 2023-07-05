@@ -177,7 +177,7 @@ async function run_speech(){
     
         // Update the transcript element with the recognized speech
         allSpoken=allSpoken.concat(transcript)
-        $('#spoken-text').val(allSpoken);s
+        $('#spoken-text').val(allSpoken);
     
         // Send the transcript to Deepgram for further processing
         //All api's have different codes for the same language the switch statement is translating it for the next api call
