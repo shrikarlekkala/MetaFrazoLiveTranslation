@@ -1,0 +1,26 @@
+﻿Meta Frazo Live Translation Summary of Capabilities for Marketing
+
+
+
+
+Meta Frazo Live Translation is a comprehensive and scalable software solution that facilitates real-time translation and audio distribution of a single audio input device, with a live presenter, conducted in various languages.
+
+
+* Login with your Meta Frazo assigned credentials
+* Select the source and target languages with Meta Frazo’s simple user interface 
+* Distribute multiple receivers that connect to a single audio transmitter from the computer, or connect a single headset through a bluetooth or wired connection.
+* Press “Start Listening” button to begin live translation
+* Live transcription, of the source and target languages, will appear on screen and can be copied for records
+* Press the “Stop Listening” button to end translation
+
+
+
+
+Summary of Limitations:
+
+
+* Optimized for Chrome browsers
+* Transcription and translation are not guaranteed to be 100% accurate
+* Most major languages can be supported
+* Live presenter must be speaking into an audio input device
+* Both audio in and audio out must be connected to the same computer
