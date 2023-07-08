@@ -24,3 +24,4 @@ Summary of Limitations:
 * Most major languages can be supported
 * Live presenter must be speaking into an audio input device
 * Both audio in and audio out must be connected to the same computer
+* Recorded audio files from external source will not be 100% accurate
