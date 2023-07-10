@@ -11,7 +11,66 @@
             margin: 0;
             padding: 0;
         }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 140px; /* Adjust the margin as desired */
+          }
+          .center-top-gif {
+            height: 140px; /* Adjust the height as desired */
+          }
+        .sign-out-btn {
+                display: block;
+                width: 200px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 18px;
+                font-family: sans-serif;
+                text-decoration: none;
+                color: white;
+                border: 1px solid white;
+                letter-spacing: 2px;
+                text-align: center;
+                position: relative;
+                transition: all 0.35s;
+              }
 
+              .sign-out-btn span {
+                position: relative;
+                z-index: 2;
+              }
+
+              .sign-out-btn:after {
+                position: absolute;
+                content: "";
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: #8A2BE2;
+                transition: all 0.35s;
+              }
+
+              .sign-out-btn:hover {
+                color: #fff;
+                animation: button-animation 3s infinite;
+              }
+
+              .sign-out-btn:hover:after {
+                width: 100%;
+              }
+          @keyframes button-animation {
+              0% {
+                transform: scale(1);
+              }
+              50% {
+                transform: scale(1.1);
+              }
+              100% {
+                transform: scale(1);
+              }
+            }
         @-webkit-keyframes Aurora {
             0% {
                 background-position: 18% 0%;
@@ -52,7 +111,9 @@
             100% {
                 background-position: 18% 0%;
             }
+            
         }
+        
   </style>
     <head>
         <meta charset="utf-8" />
@@ -114,8 +175,11 @@
             </div>
           </div>
           <section class="content-section p-4 vh-10000" id="about">
-            <a href="https://metafrazocc.com/services/"><img src="Meta-Frazo-logo-gif-unscreen.gif" alt="Meta Frazo" ,
+            <div class="header-container mb-5">
+            <a href="https://metafrazocc.com/services/"><img src="MetaFrazoPFP-removebg-preview.png" alt="Meta Frazo" ,
                 class="center-top-gif"></a>
+            <a class="sign-out-btn justify-content-right" href="Logout.html"><span>Sign out</span></a>
+            </div>   
             <div class="container px-1 px-lg-1 text-center">
               <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-10">
@@ -149,7 +213,7 @@
               <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-10">
         
-                  <h3 class="text-white">Language Translation</h3>
+                  <h3 class="p-3 text-white">Language Translation</h3>
         
         
                   <button class="btn btn-primary dropdown-toggle p-2 m-2" type="button" id="inputLanguageDropdown"
@@ -163,7 +227,7 @@
                     <li><a class="dropdown-item" href="#" data-langin="it-it">Italian</a></li>
                   </ul>
         
-                  <h6>to</h6>
+                  <h6 class="text-white">to</h6>
         
                   <button class="btn btn-primary dropdown-toggle p-2 m-2" type="button" id="outputLanguageDropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
