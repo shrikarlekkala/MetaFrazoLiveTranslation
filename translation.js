@@ -135,7 +135,7 @@ window.speechSynthesis.onvoiceschanged = function() {
   console.log(voices);
 };  
     //DISABLE start button until input language is selected
-$('#start-btn').prop('disabled', true);
+//$('#start-btn').prop('disabled', true);
   function toggleStartButton() {
     if (inputLang && outputLang) {
       $('#start-btn').prop('disabled', false);
@@ -143,6 +143,7 @@ $('#start-btn').prop('disabled', true);
       $('#start-btn').prop('disabled', true);
     }
   }
+    toggleStartButton();
 var allTranslation="";
 function translate(user_input, language){
     
