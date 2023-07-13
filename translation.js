@@ -88,16 +88,39 @@ document.addEventListener('keydown', function(e) {
   }, false);
 
 
-
+// INPUT LANGUAGE SELECTION from URL 
+  
+    const urlParams = new URLSearchParams(window.location.search);
+  const outlang = urlParams.get('outlang');
+  const inlang = urlParams.get('inlang');
+  var inputLang;
+  if(inlang){
+ 
+  inputLang=inlang;
+  $('#inputLanguageDropdown').text(inputLang);
+  console.log('Selected Input Language:', inputLang);
+  toggleStartButton();
+  $('#inputLanguageDropdown').prop('disabled',true);
+}
 //INPUT LANGUAGE SELECTION from front end dropdown buttons
-var inputLang;
       $('.dropdown-menu a[data-langin]').click(function() {
         inputLang= $(this).data('langin');
         $('#inputLanguageDropdown').text($(this).text());
         console.log('Selected Input Language:', inputLang);
         toggleStartButton();
       });
-      
+// OUTPUT LANGUAGE SELECTION from URL 
+
+  var outputLang;
+ 
+  if (outlang){
+  outputLang=outlang;
+  console.log('Selected Output Language:', outputLang);
+  $('#outputLanguageDropdown').text(outputLang);
+  toggleStartButton();
+  $('#outputLanguageDropdown').prop('disabled',true);
+  }
+  
 //OUTPUT LANGUAGE SELECTION from front end dropdown buttons
 var outputLang;
       $('.dropdown-menu a[data-langout]').click(function() {
